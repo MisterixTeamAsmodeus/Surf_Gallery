@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../../layout/compose-model-1660822074232.xml" value="0.1" />
+        <entry key="../../../../../../../layout/compose-model-1660824129761.xml" value="0.25833333333333336" />
+        <entry key="../../../../../../../layout/compose-model-1660824142762.xml" value="0.25833333333333336" />
+        <entry key="../../../../../../../layout/compose-model-1660824224503.xml" value="0.1" />
+        <entry key="../../../../../../../layout/compose-model-1660824790283.xml" value="0.18" />
+        <entry key="../../../../../../../layout/compose-model-1660825084428.xml" value="0.25833333333333336" />
+        <entry key="../../../../../../../layout/compose-model-1660912584481.xml" value="0.25" />
+        <entry key="../../../../../../../layout/compose-model-1660918589637.xml" value="0.33" />
+        <entry key="../../../../../../../layout/compose-model-1660918988716.xml" value="1.0" />
+        <entry key="../../../../../../../layout/compose-model-1660930701130.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v23/background_splash.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/background_splash.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/ic_back.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/ic_bad.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_empty_search.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/ic_icon.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/ic_login_icon.xml" value="0.1395" />
+        <entry key="app/src/main/res/drawable/ic_splash.xml" value="0.1395" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

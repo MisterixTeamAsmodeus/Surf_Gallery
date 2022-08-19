@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Surf Gallery</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_preview">PreviewActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>
