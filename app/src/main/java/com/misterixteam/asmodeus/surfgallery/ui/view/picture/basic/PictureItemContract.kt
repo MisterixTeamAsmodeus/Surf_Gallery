@@ -21,7 +21,7 @@ interface PictureItemContract {
         fun onFavoriteClick(item: PictureItem)
     }
 
-    interface Data{
+    interface Data {
         fun savePicture(picture: Picture)
         fun deletePicture(picture: Picture)
         fun loadPictures(): Array<Picture>
@@ -31,7 +31,7 @@ interface PictureItemContract {
         fun getPicture(
             token: String,
             onSuccessful: (Array<Picture>) -> Unit,
-            onError: () -> Unit
+            onError: (Int) -> Unit
         )
     }
 }

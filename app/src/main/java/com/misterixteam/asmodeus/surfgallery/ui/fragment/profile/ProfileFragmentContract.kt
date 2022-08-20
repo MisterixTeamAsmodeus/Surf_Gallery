@@ -1,7 +1,6 @@
 package com.misterixteam.asmodeus.surfgallery.ui.fragment.profile
 
 import android.content.Context
-import android.graphics.Bitmap
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.ImageBitmap
 import com.misterixteam.asmodeus.surfgallery.model.user.User

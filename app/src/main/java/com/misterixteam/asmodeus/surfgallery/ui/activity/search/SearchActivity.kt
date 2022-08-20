@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -20,12 +19,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.misterixteam.asmodeus.surfgallery.R
-import com.misterixteam.asmodeus.surfgallery.data.AppPreference
 import com.misterixteam.asmodeus.surfgallery.ui.theme.SurfGalleryTheme
+import com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawExitButton
 import com.misterixteam.asmodeus.surfgallery.ui.view.picture.search.SearchPictureItemView
 
 class SearchActivity : ComponentActivity(), SearchActivityContract.View {
@@ -49,7 +47,6 @@ class SearchActivity : ComponentActivity(), SearchActivityContract.View {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    @Preview
     private fun SearchScreen() {
         val input = remember {
             mutableStateOf(TextFieldValue(""))
@@ -61,15 +58,7 @@ class SearchActivity : ComponentActivity(), SearchActivityContract.View {
 
         Column(modifier = Modifier.padding(top = 8.dp)) {
             Row(modifier = Modifier.padding(horizontal = 8.dp)) {
-                IconButton(
-                    onClick = { finish() },
-                    modifier = Modifier.align(alignment = CenterVertically)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = "back"
-                    )
-                }
+                DrawExitButton(onClick = { finish() })
 
                 TextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -115,19 +104,16 @@ class SearchActivity : ComponentActivity(), SearchActivityContract.View {
                 pictureItemView.DrawGrid()
             }
         }
-
-        if (isEmptyResult.value) {
-            DrawInfoElement(
-                image = R.drawable.ic_bad,
-                text = "По этому запросу нет результатов,\n" +
-                        "попробуйте другой запрос"
-            )
-        }
-
         if (input.value.text.isEmpty()) {
             DrawInfoElement(
                 image = R.drawable.ic_empty_search,
                 text = "Введите ваш запрос"
+            )
+        } else if (isEmptyResult.value) {
+            DrawInfoElement(
+                image = R.drawable.ic_bad,
+                text = "По этому запросу нет результатов,\n" +
+                        "попробуйте другой запрос"
             )
         }
     }

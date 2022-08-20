@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -14,13 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.misterixteam.asmodeus.surfgallery.R
 import com.misterixteam.asmodeus.surfgallery.model.picture.Picture
 import com.misterixteam.asmodeus.surfgallery.ui.theme.SurfGalleryTheme
+import com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawExitButton
+import com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawTitle
 import java.text.SimpleDateFormat
 
 class PreviewActivity : ComponentActivity() {
@@ -51,17 +50,8 @@ class PreviewActivity : ComponentActivity() {
         }
         Column(modifier = Modifier.padding(top = 8.dp)) {
             Row {
-                IconButton(onClick = { finish() }) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_back),
-                        contentDescription = "back"
-                    )
-                }
-                Text(
-                    text = "Галерея",
-                    modifier = Modifier.padding(top = 8.dp),
-                    style = TextStyle(color = Color.Black, fontSize = 24.sp)
-                )
+                DrawExitButton(onClick = { finish() })
+                DrawTitle(text = "Галерея")
             }
             Column(modifier = Modifier.padding(horizontal = 12.dp)) {
                 image.value?.let {

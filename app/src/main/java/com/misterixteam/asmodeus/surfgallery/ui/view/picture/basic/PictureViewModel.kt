@@ -57,14 +57,14 @@ open class PictureViewModel(
     protected fun loadImageData(
         token: String,
         onSuccessful: (Array<Picture>) -> Unit,
-        onError: () -> Unit = {}
+        onError: (Int) -> Unit = {}
     ) {
         server.getPicture(
             token = token,
             onSuccessful = onSuccessful,
             onError = {
                 pictureItemState.clear()
-                onError()
+                onError(it)
             }
         )
     }

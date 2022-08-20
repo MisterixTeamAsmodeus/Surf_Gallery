@@ -1,6 +1,5 @@
 package com.misterixteam.asmodeus.surfgallery.ui.activity.preview
 
-import android.graphics.Bitmap
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.ImageBitmap
 

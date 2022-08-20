@@ -23,7 +23,7 @@ class SearchPictureViewModel(view: PictureItemContract.View) :
         )
     }
 
-    override fun textSearchText(text: String) {
+    override fun setSearchText(text: String) {
         searchText = text.lowercase(Locale.ROOT)
         if (searchText.isNotEmpty() && !pictureItems.isNullOrEmpty()) {
             val array = ArrayList<Picture>()

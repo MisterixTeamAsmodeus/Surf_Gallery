@@ -16,15 +16,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +32,8 @@ import com.misterixteam.asmodeus.surfgallery.R
 import com.misterixteam.asmodeus.surfgallery.model.TrailingIconState
 import com.misterixteam.asmodeus.surfgallery.ui.MaskVisualTransformation
 import com.misterixteam.asmodeus.surfgallery.ui.theme.SurfGalleryTheme
+import com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawErrorMassage
+import com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawTitle
 
 
 class LoginActivity : ComponentActivity(), LoginActivityContract.View {
@@ -68,9 +67,22 @@ class LoginActivity : ComponentActivity(), LoginActivityContract.View {
         ) {
             DrawInput(loginViewId)
             if (isAuthError.value) {
-                DrawError(errorId)
+                DrawErrorMassage(
+                    text = "Логин или пароль введен неправильно",
+                    modifier = Modifier.layoutId(errorId),
+                    backgroundColor = MaterialTheme.colorScheme.error
+                )
             }
-            DrawButton(buttonId)
+            val isEnableState = remember {
+                isUiActive
+            }
+            com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawButton(
+                onClick = { viewModel.onLoginClick() },
+                text = "Войти",
+                isEnable = isEnableState.value,
+                modifier = Modifier.layoutId(buttonId)
+            )
+
         }
     }
 
@@ -124,12 +136,7 @@ class LoginActivity : ComponentActivity(), LoginActivityContract.View {
             modifier = Modifier
                 .layoutId(id)
         ) {
-            Text(
-                text = "Вход",
-                fontWeight = FontWeight.Bold,
-                style = TextStyle(color = Color.Black, fontSize = 24.sp),
-                modifier = Modifier.padding(start = 16.dp, top = 16.dp)
-            )
+            DrawTitle(text = "Вход")
 
             AddTopMargin(45.dp)
 
@@ -222,47 +229,6 @@ class LoginActivity : ComponentActivity(), LoginActivityContract.View {
                     )
                 )
             }
-        }
-    }
-
-    @Composable
-    private fun DrawError(id: String) {
-        Text(
-            text = "Логин или пароль введен неправильно",
-            style = TextStyle(
-                color = Color.White,
-                fontSize = 14.sp,
-                textAlign = TextAlign.Center
-            ),
-            modifier = Modifier
-                .layoutId(id)
-                .padding(horizontal = 8.dp)
-                .background(color = MaterialTheme.colorScheme.error, shape = RectangleShape)
-                .padding(16.dp)
-        )
-    }
-
-    @Composable
-    private fun DrawButton(id: String) {
-        val state = remember {
-            isUiActive
-        }
-        Button(
-            enabled = state.value,
-            onClick = { viewModel.onLoginClick() },
-            shape = RectangleShape,
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 20.dp)
-                .layoutId(id)
-        ) {
-            Text(
-                text = "Войти",
-                fontWeight = FontWeight.SemiBold,
-                style = TextStyle(color = Color.White, fontSize = 16.sp),
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
         }
     }
 

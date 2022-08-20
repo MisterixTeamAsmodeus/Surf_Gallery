@@ -32,7 +32,7 @@ interface HomeFragmentContract {
         }
 
         interface ViewModel {
-            fun updatePicture(token: String, onSuccessful: () -> Unit, onError: () -> Unit)
+            fun updatePicture(token: String, onSuccessful: () -> Unit, onError: (Int) -> Unit)
             fun isPictureEmptyState(): MutableState<Boolean>
         }
     }

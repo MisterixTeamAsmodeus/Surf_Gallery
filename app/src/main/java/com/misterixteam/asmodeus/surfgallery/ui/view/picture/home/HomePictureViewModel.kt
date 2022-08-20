@@ -10,13 +10,13 @@ class HomePictureViewModel(
     HomePictureItemContract.ViewModel,
     HomeFragmentContract.Picture.ViewModel {
 
-    override fun updatePicture(token: String, onSuccessful: () -> Unit, onError: () -> Unit) {
+    override fun updatePicture(token: String, onSuccessful: () -> Unit, onError: (Int) -> Unit) {
         loadImageData(
             token = token,
             onSuccessful = {
                 if (it.isEmpty()) {
                     clearPicture()
-                    onError()
+                    onError(1)
                 } else {
                     replacePicture(it)
                     onSuccessful()
@@ -24,7 +24,7 @@ class HomePictureViewModel(
             },
             onError = {
                 clearPicture()
-                onError()
+                onError(it)
             }
         )
     }

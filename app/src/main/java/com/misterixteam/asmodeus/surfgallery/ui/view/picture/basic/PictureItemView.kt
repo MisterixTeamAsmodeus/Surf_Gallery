@@ -9,12 +9,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,7 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.misterixteam.asmodeus.surfgallery.R
 import com.misterixteam.asmodeus.surfgallery.model.picture.PictureItem
+import com.misterixteam.asmodeus.surfgallery.ui.view.basic.DrawDialog
 import java.text.SimpleDateFormat
+import java.util.*
 
 abstract class PictureItemView(context: Context) : PictureItemContract.View {
 
@@ -56,9 +55,11 @@ abstract class PictureItemView(context: Context) : PictureItemContract.View {
         val openDialog = remember { mutableStateOf(false) }
 
         if (openDialog.value) {
-            ShowDialog(openDialog) {
-                viewModel.onFavoriteClick(item)
-            }
+            DrawDialog(
+                openDialog = openDialog,
+                onSuccessful = { viewModel.onFavoriteClick(item) },
+                text = "Вы точно хотите удалить из избранного?"
+            )
         }
 
         Column(modifier = modifier
@@ -96,7 +97,6 @@ abstract class PictureItemView(context: Context) : PictureItemContract.View {
                     )
                 }
             }
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -109,7 +109,10 @@ abstract class PictureItemView(context: Context) : PictureItemContract.View {
                 )
                 if (showContent) {
                     Text(
-                        text = SimpleDateFormat("dd.MM.yyyy").format(item.picture.publicationDate),
+                        text = SimpleDateFormat(
+                            "dd.MM.yyyy",
+                            Locale.getDefault()
+                        ).format(item.picture.publicationDate),
                         style = TextStyle(color = Color.Gray, fontSize = 10.sp),
                         modifier = Modifier.align(Alignment.CenterEnd)
                     )
@@ -125,36 +128,5 @@ abstract class PictureItemView(context: Context) : PictureItemContract.View {
                 )
             }
         }
-    }
-
-    @Composable
-    private fun ShowDialog(openDialog: MutableState<Boolean>, onSuccessful: () -> Unit) {
-        AlertDialog(
-            onDismissRequest = {
-                openDialog.value = false
-            },
-            title = {
-                Text(text = "Вы точно хотите удалить из избранного?")
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        openDialog.value = false
-                        onSuccessful()
-                    }
-                ) {
-                    Text("да, точно".uppercase(), style = TextStyle(Color.Black))
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        openDialog.value = false
-                    }
-                ) {
-                    Text("нет".uppercase(), style = TextStyle(Color.Black))
-                }
-            }
-        )
     }
 }

@@ -12,8 +12,10 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Retrofit
 
-class Server : LoginActivityContract.Server,
-    ProfileFragmentContract.Server, PictureItemContract.Server {
+class Server :
+    LoginActivityContract.Server,
+    ProfileFragmentContract.Server,
+    PictureItemContract.Server {
     private val baseUrl = "https://pictures.chronicker.fun/api/"
     private val api = Retrofit.Builder().baseUrl(baseUrl).build().create(ServerApi::class.java)
 
@@ -65,10 +67,10 @@ class Server : LoginActivityContract.Server,
     override fun getPicture(
         token: String,
         onSuccessful: (Array<Picture>) -> Unit,
-        onError: () -> Unit
+        onError: (Int) -> Unit
     ) {
         CoroutineScope(Dispatchers.IO + CoroutineExceptionHandler { _, _ ->
-            onError()
+            onError(1)
         }).launch {
             val response =
                 api.getPicture("Token $token")
@@ -81,7 +83,10 @@ class Server : LoginActivityContract.Server,
                         )
                     )
                 } else {
-                    onError()
+                    if (response.code() == 401)
+                        onError(404)
+                    else
+                        onError(1)
                 }
             }
         }

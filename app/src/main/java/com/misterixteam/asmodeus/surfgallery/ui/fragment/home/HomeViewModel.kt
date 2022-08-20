@@ -44,6 +44,8 @@ class HomeViewModel(
                     loadState.isRefreshing = false
                 },
                 onError = {
+                    if (it == 404)
+                        view.openNewActivity(LoginActivity::class.java)
                     loadState.isRefreshing = false
                     errorState.value = true
                 }

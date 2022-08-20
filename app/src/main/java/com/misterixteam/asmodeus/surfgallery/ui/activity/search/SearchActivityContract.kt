@@ -23,8 +23,9 @@ interface SearchActivityContract {
         }
 
         interface ViewModel {
+            fun isPictureEmptyState(): MutableState<Boolean>
             fun loadData(token: String)
-            fun textSearchText(text: String)
+            fun setSearchText(text: String)
         }
     }
 }

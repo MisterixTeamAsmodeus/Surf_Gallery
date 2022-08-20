@@ -1,7 +1,6 @@
 package com.misterixteam.asmodeus.surfgallery.ui.activity.search
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.misterixteam.asmodeus.surfgallery.data.AppPreference
 
 class SearchViewModel(
@@ -15,11 +14,12 @@ class SearchViewModel(
         }
     }
 
+
     override fun isPictureEmptyState(): MutableState<Boolean> {
-        return mutableStateOf(false)
+        return pictureViewModel.isPictureEmptyState()
     }
 
     override fun textChange(text: String) {
-        pictureViewModel.textSearchText(text)
+        pictureViewModel.setSearchText(text)
     }
 }

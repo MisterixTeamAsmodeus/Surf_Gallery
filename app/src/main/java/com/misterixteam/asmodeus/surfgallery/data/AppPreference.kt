@@ -20,10 +20,10 @@ class AppPreference : SplashActivityContract.Data, LoginActivityContract.Data,
     }
 
     override fun getUserInfo(context: Context): User {
-        val user = Gson().fromJson(
+        return Gson().fromJson(
             context.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
-                .getString(USER_INFO, null), User::class.java)
-        return user
+                .getString(USER_INFO, null), User::class.java
+        )
 
     }
 
